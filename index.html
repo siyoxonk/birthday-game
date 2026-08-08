@@ -7,6 +7,7 @@
 <title>동윤아 🎂</title>
 
 <style>
+
 * {
     box-sizing: border-box;
 }
@@ -14,8 +15,20 @@
 body {
     margin: 0;
     min-height: 100vh;
-    font-family: "맑은 고딕", sans-serif;
-    background: linear-gradient(135deg, #dff4ff, #edf8ff, #ffe8f1);
+
+    font-family:
+        "맑은 고딕",
+        Arial,
+        sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #dff4ff,
+            #edf8ff,
+            #ffe8f1
+        );
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,12 +37,21 @@ body {
 .game {
     width: 90%;
     max-width: 650px;
+
     max-height: 92vh;
     overflow-y: auto;
-    background: rgba(255,255,255,0.9);
-    border-radius: 30px;
-    box-shadow: 0 15px 40px rgba(120,180,210,0.25);
+
     padding: 40px;
+
+    background:
+        rgba(255,255,255,0.92);
+
+    border-radius: 30px;
+
+    box-shadow:
+        0 15px 40px
+        rgba(100,150,180,0.25);
+
     text-align: center;
 }
 
@@ -50,24 +72,42 @@ p {
 
 button {
     border: none;
+
     border-radius: 15px;
-    padding: 14px 28px;
+
+    padding:
+        14px 28px;
+
     margin: 8px;
+
     font-size: 16px;
+
     font-weight: bold;
+
     cursor: pointer;
+
     background: #bde7fa;
+
     color: #4e7180;
+
+    transition: 0.15s;
 }
 
 button:hover {
-    transform: translateY(-2px);
+    transform:
+        translateY(-2px);
 }
 
 button:disabled {
     background: #dce8ed;
+
     color: #aab7bc;
-    cursor: not-allowed;
+
+    cursor:
+        not-allowed;
+
+    transform:
+        none;
 }
 
 .pink {
@@ -79,15 +119,30 @@ button:disabled {
     font-size: 70px;
 }
 
+
+/* =========================
+   동윤이 사진
+========================= */
+
 .doyoon-photo {
     display: block;
+
     width: 210px;
     height: 210px;
+
     object-fit: cover;
+
     border-radius: 30px;
-    margin: 20px auto;
-    border: 5px solid white;
-    box-shadow: 0 10px 30px rgba(100,150,180,0.25);
+
+    margin:
+        20px auto;
+
+    border:
+        5px solid white;
+
+    box-shadow:
+        0 10px 30px
+        rgba(100,150,180,0.25);
 }
 
 
@@ -97,40 +152,79 @@ button:disabled {
 
 .game-area {
     width: min(90vw, 430px);
+
     aspect-ratio: 1 / 1;
-    margin: 20px auto;
+
+    margin:
+        20px auto;
+
     padding: 5px;
-    background: #edf8fc;
-    border: 2px dashed #b9dfea;
-    border-radius: 20px;
+
+    background:
+        #edf8fc;
+
+    border:
+        2px dashed #b9dfea;
+
+    border-radius:
+        20px;
 
     display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    grid-template-rows: repeat(10, 1fr);
+
+    grid-template-columns:
+        repeat(10, 1fr);
+
+    grid-template-rows:
+        repeat(10, 1fr);
+
     gap: 2px;
 }
+
+
+/* =========================
+   게임 글자
+========================= */
 
 .target {
     width: 100%;
     height: 100%;
-    margin: 0;
+
     padding: 0;
+    margin: 0;
+
     border-radius: 6px;
-    background: transparent;
-    color: #609fbd;
-    font-size: clamp(14px, 4vw, 24px);
+
+    background:
+        transparent;
+
+    color:
+        #609fbd;
+
+    font-size:
+        clamp(
+            14px,
+            4vw,
+            24px
+        );
+
     display: flex;
-    align-items: center;
+
     justify-content: center;
+
+    align-items: center;
 }
 
 .target:hover {
-    background: #ffdce8;
+    background:
+        #ffdce8;
 }
 
 .target:disabled {
-    color: transparent;
-    background: transparent;
+    color:
+        transparent;
+
+    background:
+        transparent;
 }
 
 
@@ -140,21 +234,41 @@ button:disabled {
 
 .popup-background {
     position: fixed;
+
     inset: 0;
-    background: rgba(70,100,120,0.3);
+
+    background:
+        rgba(
+            70,
+            100,
+            120,
+            0.3
+        );
+
     display: none;
+
     justify-content: center;
+
     align-items: center;
+
     z-index: 9999;
 }
 
 .popup {
     width: 80%;
+
     max-width: 350px;
+
     padding: 30px;
+
     background: white;
+
     border-radius: 25px;
-    box-shadow: 0 15px 40px rgba(80,130,160,0.3);
+
+    box-shadow:
+        0 15px 40px
+        rgba(80,130,160,0.3);
+
     text-align: center;
 }
 
@@ -171,8 +285,11 @@ button:disabled {
 }
 
 .popup button {
-    background: #ffd1df;
-    color: #8f6170;
+    background:
+        #ffd1df;
+
+    color:
+        #8f6170;
 }
 
 
@@ -181,14 +298,34 @@ button:disabled {
 ========================= */
 
 .letter {
-    background: rgba(255,255,255,0.8);
-    border-radius: 20px;
-    padding: 25px;
-    margin-top: 20px;
-    color: #687c86;
-    font-size: 17px;
-    line-height: 2;
-    text-align: left;
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.8
+        );
+
+    border-radius:
+        20px;
+
+    padding:
+        25px;
+
+    margin-top:
+        20px;
+
+    color:
+        #687c86;
+
+    font-size:
+        17px;
+
+    line-height:
+        2;
+
+    text-align:
+        left;
 }
 
 
@@ -197,46 +334,87 @@ button:disabled {
 ========================= */
 
 .final-text {
-    font-size: 42px;
-    font-weight: bold;
-    color: #609fbd;
-    margin: 20px 0;
+    font-size:
+        42px;
+
+    font-weight:
+        bold;
+
+    color:
+        #609fbd;
+
+    margin:
+        20px 0;
 }
 
 .small {
-    font-size: 14px;
-    color: #9aaab2;
+    font-size:
+        14px;
+
+    color:
+        #9aaab2;
 }
 
 .birthday {
-    animation: bounce 1s infinite alternate;
+    animation:
+        bounce
+        1s
+        infinite
+        alternate;
 }
 
 @keyframes bounce {
+
     from {
-        transform: scale(1);
+        transform:
+            scale(1);
     }
+
     to {
-        transform: scale(1.08);
+        transform:
+            scale(1.08);
     }
+
 }
 
 
-/* 폭죽 */
+/* =========================
+   폭죽
+========================= */
 
 .confetti {
-    position: fixed;
-    top: -30px;
-    font-size: 24px;
-    pointer-events: none;
-    animation: fall 3s linear forwards;
+    position:
+        fixed;
+
+    top:
+        -30px;
+
+    font-size:
+        24px;
+
+    pointer-events:
+        none;
+
+    animation:
+        fall
+        3s
+        linear
+        forwards;
 }
 
 @keyframes fall {
+
     to {
-        transform: translateY(110vh) rotate(360deg);
-        opacity: 0;
+
+        transform:
+            translateY(110vh)
+            rotate(360deg);
+
+        opacity:
+            0;
+
     }
+
 }
 
 </style>
@@ -253,7 +431,9 @@ button:disabled {
      첫 화면
 ========================= -->
 
-<div id="screen1" class="screen">
+<div
+    id="screen1"
+    class="screen">
 
     <img
         src="./doyoon.jpg"
@@ -270,8 +450,11 @@ button:disabled {
         재미있게 즐겨봐 :)
     </p>
 
-    <button onclick="showScreen(2)">
+    <button
+        onclick="showScreen(2)">
+
         게임 시작하기
+
     </button>
 
 </div>
@@ -282,7 +465,9 @@ button:disabled {
      Stage 1
 ========================= -->
 
-<div id="screen2" class="screen hidden">
+<div
+    id="screen2"
+    class="screen hidden">
 
     <div class="emoji">
         🔎
@@ -297,8 +482,11 @@ button:disabled {
         한번 찾아볼까?
     </p>
 
-    <button onclick="goToStage2()">
+    <button
+        onclick="startGame()">
+
         찾아보기
+
     </button>
 
 </div>
@@ -309,7 +497,9 @@ button:disabled {
      Stage 2
 ========================= -->
 
-<div id="screen3" class="screen hidden">
+<div
+    id="screen3"
+    class="screen hidden">
 
     <h1>
         Stage 2
@@ -347,7 +537,9 @@ button:disabled {
      Stage 3
 ========================= -->
 
-<div id="screen4" class="screen hidden">
+<div
+    id="screen4"
+    class="screen hidden">
 
     <div class="emoji">
         💡
@@ -362,8 +554,11 @@ button:disabled {
         거의 다 왔어.
     </p>
 
-    <button onclick="showScreen(5)">
+    <button
+        onclick="showScreen(5)">
+
         계속하기
+
     </button>
 
 </div>
@@ -374,7 +569,9 @@ button:disabled {
      마지막 스테이지
 ========================= -->
 
-<div id="screen5" class="screen hidden">
+<div
+    id="screen5"
+    class="screen hidden">
 
     <div class="emoji">
         🎁
@@ -405,14 +602,21 @@ button:disabled {
      생일 축하
 ========================= -->
 
-<div id="screen6" class="screen hidden">
+<div
+    id="screen6"
+    class="screen hidden">
 
-    <div class="emoji birthday">
+    <div
+        class="emoji birthday">
+
         🎂
+
     </div>
 
     <div class="final-text">
+
         진짜 생일 축하해! 🎉
+
     </div>
 
     <p>
@@ -420,8 +624,11 @@ button:disabled {
         좋은 일만 가득했으면 좋겠다 :)
     </p>
 
-    <button onclick="showScreen(7)">
+    <button
+        onclick="showScreen(7)">
+
         다음
+
     </button>
 
 </div>
@@ -432,7 +639,9 @@ button:disabled {
      장문의 편지
 ========================= -->
 
-<div id="screen7" class="screen hidden">
+<div
+    id="screen7"
+    class="screen hidden">
 
     <div class="emoji">
         💌
@@ -460,8 +669,11 @@ button:disabled {
 
     </div>
 
-    <button onclick="showScreen(8)">
+    <button
+        onclick="showScreen(8)">
+
         다음
+
     </button>
 
 </div>
@@ -472,7 +684,9 @@ button:disabled {
      마지막
 ========================= -->
 
-<div id="screen8" class="screen hidden">
+<div
+    id="screen8"
+    class="screen hidden">
 
     <div class="emoji">
         💙
@@ -524,8 +738,11 @@ button:disabled {
             그 사람 이름을 누르면 어떡해...
         </p>
 
-        <button onclick="closePopup()">
+        <button
+            onclick="closePopup()">
+
             미안해...
+
         </button>
 
     </div>
@@ -547,52 +764,66 @@ function showScreen(number) {
         .querySelectorAll(".screen")
         .forEach(function(screen) {
 
-            screen.classList.add("hidden");
+            screen.classList.add(
+                "hidden"
+            );
 
         });
 
 
     document
-        .getElementById("screen" + number)
-        .classList.remove("hidden");
+        .getElementById(
+            "screen" + number
+        )
+        .classList.remove(
+            "hidden"
+        );
 
 }
 
 
 /* =========================
-   Stage 2 진입
+   게임 시작
 ========================= */
 
-function goToStage2() {
+function startGame() {
+
+    /*
+       Stage 2로 이동
+    */
 
     showScreen(3);
 
-    createGame();
 
-}
-
-
-/* =========================
-   게임 생성
-========================= */
-
-function createGame() {
+    /*
+       게임판 초기화
+    */
 
     const area =
-        document.getElementById("gameArea");
+        document.getElementById(
+            "gameArea"
+        );
+
 
     const counter =
-        document.getElementById("counter");
+        document.getElementById(
+            "counter"
+        );
+
 
     const clearButton =
-        document.getElementById("clearButton");
+        document.getElementById(
+            "clearButton"
+        );
 
 
-    /* 초기화 */
+    area.innerHTML =
+        "";
 
-    area.innerHTML = "";
 
-    clearButton.disabled = true;
+    clearButton.disabled =
+        true;
+
 
     clearButton.innerText =
         "아직이야!";
@@ -606,6 +837,7 @@ function createGame() {
     */
 
     const letters = [
+
         "김",
         "시",
         "윤",
@@ -613,6 +845,7 @@ function createGame() {
         "정",
         "황",
         "동"
+
     ];
 
 
@@ -620,13 +853,19 @@ function createGame() {
 
 
     /*
-       정확히 100개 생성
+       100개 만들기
     */
 
-    for (let i = 0; i < 100; i++) {
+    for (
+        let i = 0;
+        i < 100;
+        i++
+    ) {
 
         list.push(
-            letters[i % 7]
+            letters[
+                i % letters.length
+            ]
         );
 
     }
@@ -637,22 +876,28 @@ function createGame() {
     */
 
     for (
-        let i = list.length - 1;
+        let i =
+            list.length - 1;
+
         i > 0;
+
         i--
     ) {
 
         const j =
             Math.floor(
-                Math.random() * (i + 1)
+                Math.random()
+                * (i + 1)
             );
 
 
         const temp =
             list[i];
 
+
         list[i] =
             list[j];
+
 
         list[j] =
             temp;
@@ -661,29 +906,37 @@ function createGame() {
 
 
     /*
-       김 / 시 / 윤 개수 계산
+       찾아야 하는 글자 수
     */
 
     let remaining = 0;
 
 
-    list.forEach(function(letter) {
+    for (
+        let i = 0;
+        i < list.length;
+        i++
+    ) {
 
         if (
-            letter === "김" ||
-            letter === "시" ||
-            letter === "윤"
+
+            list[i] === "김" ||
+
+            list[i] === "시" ||
+
+            list[i] === "윤"
+
         ) {
 
             remaining++;
 
         }
 
-    });
+    }
 
 
     /*
-       남은 글자 표시
+       화면에 표시
     */
 
     counter.innerText =
@@ -691,13 +944,24 @@ function createGame() {
 
 
     /*
-       게임판 100칸 생성
+       100개 버튼 생성
     */
 
-    list.forEach(function(letter) {
+    for (
+        let i = 0;
+        i < list.length;
+        i++
+    ) {
+
+
+        const letter =
+            list[i];
+
 
         const cell =
-            document.createElement("button");
+            document.createElement(
+                "button"
+            );
 
 
         cell.className =
@@ -712,87 +976,92 @@ function createGame() {
             letter;
 
 
-        cell.addEventListener(
-            "click",
+        cell.onclick =
             function() {
 
 
-                /*
-                   김 / 시 / 윤
-                */
+            /*
+               김 / 시 / 윤
+            */
+
+            if (
+
+                letter === "김" ||
+
+                letter === "시" ||
+
+                letter === "윤"
+
+            ) {
+
 
                 if (
-                    letter === "김" ||
-                    letter === "시" ||
-                    letter === "윤"
+                    cell.disabled
                 ) {
 
-
-                    if (
-                        cell.disabled
-                    ) {
-
-                        return;
-
-                    }
-
-
-                    cell.disabled =
-                        true;
-
-
-                    cell.innerText =
-                        "";
-
-
-                    remaining--;
-
-
-                    counter.innerText =
-                        remaining;
-
-
-                    /*
-                       전부 찾음
-                    */
-
-                    if (
-                        remaining === 0
-                    ) {
-
-                        clearButton.disabled =
-                            false;
-
-                        clearButton.innerText =
-                            "✨ 다 찾았다! 다음으로";
-
-                    }
+                    return;
 
                 }
 
 
+                cell.disabled =
+                    true;
+
+
+                cell.innerText =
+                    "";
+
+
+                remaining--;
+
+
+                counter.innerText =
+                    remaining;
+
+
                 /*
-                   고 / 정 / 황 / 동
+                   전부 찾음
                 */
 
-                else {
+                if (
+                    remaining === 0
+                ) {
 
-                    document
-                        .getElementById(
-                            "sadPopup"
-                        )
-                        .style.display =
-                        "flex";
+                    clearButton.disabled =
+                        false;
+
+
+                    clearButton.innerText =
+                        "✨ 다 찾았다! 다음으로";
 
                 }
 
             }
+
+
+            /*
+               고 / 정 / 황 / 동
+            */
+
+            else {
+
+                document
+                    .getElementById(
+                        "sadPopup"
+                    )
+                    .style.display =
+                    "flex";
+
+            }
+
+        };
+
+
+        area.appendChild(
+            cell
         );
 
-
-        area.appendChild(cell);
-
-    });
+    }
 
 }
 
@@ -804,7 +1073,9 @@ function createGame() {
 function closePopup() {
 
     document
-        .getElementById("sadPopup")
+        .getElementById(
+            "sadPopup"
+        )
         .style.display =
         "none";
 
@@ -821,12 +1092,14 @@ function birthday() {
 
 
     const emojis = [
+
         "🎉",
         "✨",
         "💙",
         "🩷",
         "🎂",
         "🎈"
+
     ];
 
 
@@ -836,8 +1109,11 @@ function birthday() {
         i++
     ) {
 
+
         const confetti =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
 
         confetti.className =
@@ -854,11 +1130,17 @@ function birthday() {
 
 
         confetti.style.left =
-            Math.random() * 100 + "vw";
+            Math.random()
+            * 100
+            + "vw";
 
 
         confetti.style.animationDuration =
-            2 + Math.random() * 2 + "s";
+            (
+                2 +
+                Math.random() * 2
+            )
+            + "s";
 
 
         document.body.appendChild(
@@ -880,7 +1162,6 @@ function birthday() {
 }
 
 </script>
-
 
 </body>
 </html>
