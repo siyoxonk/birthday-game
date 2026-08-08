@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>🎂 Birthday Game</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    font-family:
+        "Pretendard",
+        "맑은 고딕",
+        sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #dff4ff,
+            #edf8ff,
+            #ffe8f1
+        );
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+}
+
+
+/* =========================
+   메인 게임창
+========================= */
+
+.game {
+    width: 90%;
+    max-width: 650px;
+    min-height: 430px;
+
+    background:
+        rgba(255,255,255,0.78);
+
+    border-radius: 30px;
+
+    box-shadow:
+        0 15px 40px
+        rgba(120,180,210,0.25);
+
+    padding: 40px;
+
+    text-align: center;
+
+    position: relative;
+
+    backdrop-filter: blur(10px);
+}
+
+
+/* =========================
+   기본 글씨
+========================= */
+
+h1 {
+    color: #5d9fbe;
+    font-size: 34px;
+}
+
+p {
+    color: #6c7f89;
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+
+/* =========================
+   버튼
+========================= */
+
+button {
+
+    border: none;
+
+    border-radius: 15px;
+
+    padding:
+        14px 28px;
+
+    margin: 8px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    background: #bde7fa;
+
+    color: #4e7180;
+
+    transition: 0.2s;
+}
+
+
+button:hover {
+
+    transform:
+        translateY(-3px);
+}
+
+
+button:disabled {
+
+    background: #dce8ed;
+
+    color: #aab7bc;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+.pink {
+
+    background: #ffd1df;
+
+    color: #8f6170;
+}
+
+
+/* =========================
+   화면
+========================= */
+
+.hidden {
+    display: none;
+}
+
+
+.screen {
+
+    animation:
+        fadeIn
+        0.5s
+        ease;
+}
+
+
+.emoji {
+
+    font-size: 70px;
+}
+
+
+/* =========================
+   진행도
+========================= */
+
+.progress {
+
+    position: absolute;
+
+    top: 18px;
+
+    left: 25px;
+
+    right: 25px;
+
+    height: 7px;
+
+    background: #e4f3f9;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+
+.progress-bar {
+
+    height: 100%;
+
+    width: 0%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #a8dff5,
+            #ffc5d8
+        );
+
+    transition:
+        width 0.5s;
+}
+
+
+/* =========================
+   10 × 10 게임판
+========================= */
+
+.game-area {
+
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 1 / 1;
+
+    max-width: 430px;
+
+    margin:
+        15px auto;
+
+    background:
+        rgba(225,244,252,0.55);
+
+    border:
+        2px dashed #b9dfea;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(10, 1fr);
+
+    grid-template-rows:
+        repeat(10, 1fr);
+}
+
+
+/* 글자 */
+
+.target {
+
+    width: 100%;
+    height: 100%;
+
+    border: none;
+
+    padding: 0;
+
+    margin: 0;
+
+    background: transparent;
+
+    color: #609fbd;
+
+    font-size:
+        clamp(
+            15px,
+            4vw,
+            25px
+        );
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    border-radius: 6px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    transition: 0.15s;
+}
+
+
+.target:hover {
+
+    background:
+        rgba(
+            255,
+            209,
+            223,
+            0.7
+        );
+
+    transform:
+        scale(1.12);
+}
+
+
+/* =========================
+   서운하다 팝업
+========================= */
+
+.popup-background {
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(
+            70,
+            100,
+            120,
+            0.25
+        );
+
+    display: none;
+
+    justify-content: center;
+
+    align-items: center;
+
+    z-index: 1000;
+
+    backdrop-filter:
+        blur(3px);
+}
+
+
+.popup {
+
+    width: 80%;
+
+    max-width: 350px;
+
+    padding: 30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #eefaff
+        );
+
+    border-radius: 25px;
+
+    box-shadow:
+        0 15px 40px
+        rgba(80,130,160,0.3);
+
+    text-align: center;
+
+    animation:
+        popupIn
+        0.25s
+        ease;
+}
+
+
+.popup .sad {
+
+    font-size: 55px;
+
+    margin-bottom: 10px;
+}
+
+
+.popup h2 {
+
+    color: #6b9eb5;
+
+    margin-bottom: 10px;
+}
+
+
+.popup p {
+
+    font-size: 16px;
+
+    color: #788e99;
+}
+
+
+.popup button {
+
+    background: #ffd1df;
+
+    color: #8f6170;
+}
+
+
+/* =========================
+   편지
+========================= */
+
+.letter {
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.65
+        );
+
+    border-radius: 20px;
+
+    padding: 25px;
+
+    margin-top: 20px;
+
+    color: #687c86;
+
+    font-size: 17px;
+
+    line-height: 2;
+
+    text-align: left;
+
+    box-shadow:
+        inset 0 0 15px
+        rgba(150,200,220,0.08);
+}
+
+
+/* =========================
+   마지막
+========================= */
+
+.birthday {
+
+    animation:
+        birthday
+        1.2s
+        infinite alternate;
+}
+
+
+.final-text {
+
+    font-size: 42px;
+
+    font-weight: bold;
+
+    color: #609fbd;
+
+    margin: 20px 0;
+}
+
+
+.small {
+
+    font-size: 14px;
+
+    color: #9aaab2;
+}
+
+
+/* =========================
+   폭죽
+========================= */
+
+.confetti {
+
+    position: fixed;
+
+    top: -20px;
+
+    font-size: 22px;
+
+    animation:
+        fall
+        3s
+        linear
+        forwards;
+
+    pointer-events: none;
+}
+
+
+/* =========================
+   애니메이션
+========================= */
+
+@keyframes fadeIn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(15px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+@keyframes birthday {
+
+    from {
+
+        transform:
+            scale(1);
+    }
+
+    to {
+
+        transform:
+            scale(1.06);
+    }
+}
+
+
+@keyframes popupIn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            scale(0.8);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            scale(1);
+    }
+}
+
+
+@keyframes fall {
+
+    to {
+
+        transform:
+            translateY(110vh)
+            rotate(360deg);
+
+        opacity: 0;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<div class="game">
+
+
+    <!-- 진행도 -->
+
+    <div class="progress">
+
+        <div
+            class="progress-bar"
+            id="progress">
+        </div>
+
+    </div>
+
+
+    <!-- =====================
+         시작
+    ====================== -->
+
+    <div
+        id="screen1"
+        class="screen">
+
+
+        <div class="emoji">
+            🎮
+        </div>
+
+
+        <h1>
+            작은 게임 하나 준비했어
+        </h1>
+
+
+        <p>
+
+            그냥 게임이라고 생각하고<br>
+
+            천천히 진행해봐 :)
+
+        </p>
+
+
+        <button
+            onclick="next(2)">
+
+            게임 시작하기
+
+        </button>
+
+    </div>
+
+
+
+    <!-- =====================
+         Stage 1
+    ====================== -->
+
+    <div
+        id="screen2"
+        class="screen hidden">
+
+
+        <div class="emoji">
+            🔎
+        </div>
+
+
+        <h1>
+            Stage 1
+        </h1>
+
+
+        <p>
+
+            오늘은 뭔가 특별한 날인 것 같은데...<br>
+
+            한번 찾아볼까?
+
+        </p>
+
+
+        <button
+            onclick="next(3)">
+
+            찾아보기
+
+        </button>
+
+    </div>
+
+
+
+    <!-- =====================
+         Stage 2
+    ====================== -->
+
+    <div
+        id="screen3"
+        class="screen hidden">
+
+
+        <h1>
+            Stage 2
+        </h1>
+
+
+        <p>
+
+            너가 가장 좋아하는 사람 이름을<br>
+
+            다 눌러봐 💙
+
+        </p>
+
+
+        <p>
+
+            남은 글자 :
+
+            <span id="counter">
+                0
+            </span>
+
+        </p>
+
+
+        <div
+            class="game-area"
+            id="gameArea">
+        </div>
+
+
+        <button
+            id="clearButton"
+            disabled
+            onclick="next(4)">
+
+            아직이야!
+
+        </button>
+
+    </div>
+
+
+
+    <!-- =====================
+         Stage 3
+    ====================== -->
+
+    <div
+        id="screen4"
+        class="screen hidden">
+
+
+        <div class="emoji">
+            💡
+        </div>
+
+
+        <h1>
+            Stage 3
+        </h1>
+
+
+        <p>
+
+            사실 여기까지 온 것만 해도<br>
+
+            거의 다 왔어.
+
+        </p>
+
+
+        <button
+            onclick="next(5)">
+
+            계속하기
+
+        </button>
+
+    </div>
+
+
+
+    <!-- =====================
+         마지막 전
+    ====================== -->
+
+    <div
+        id="screen5"
+        class="screen hidden">
+
+
+        <div class="emoji">
+            🎁
+        </div>
+
+
+        <h1>
+            마지막 스테이지
+        </h1>
+
+
+        <p>
+
+            이제 진짜 마지막이야.<br>
+
+            준비됐으면 눌러봐.
+
+        </p>
+
+
+        <button
+            class="pink"
+            onclick="birthday()">
+
+            🎁 열어보기
+
+        </button>
+
+    </div>
+
+
+
+    <!-- =====================
+         생일 축하
+    ====================== -->
+
+    <div
+        id="screen6"
+        class="screen hidden">
+
+
+        <div class="emoji birthday">
+            🎂
+        </div>
+
+
+        <div class="final-text">
+
+            진짜 생일 축하해! 🎉
+
+        </div>
+
+
+        <p>
+
+            오늘 하루 누구보다 행복하고<br>
+
+            좋은 일만 가득했으면 좋겠다 :)
+
+        </p>
+
+
+        <button
+            onclick="closeMessage()">
+
+            다음
+
+        </button>
+
+    </div>
+
+
+
+    <!-- =====================
+         장문의 편지
+    ====================== -->
+
+    <div
+        id="screen7"
+        class="screen hidden">
+
+
+        <div class="emoji">
+            💌
+        </div>
+
+
+        <h1>
+            동윤이에게
+        </h1>
+
+
+        <div class="letter">
+
+            동윤아, 생일 축하해.<br><br>
+
+            교회에서 처음 만났을 때는
+            되게 서먹했는데<br>
+
+            이렇게 친해지니까 너무 좋다.<br><br>
+
+            수련회에서도 같이 얘기하는 거
+            너무 재밌었어.<br><br>
+
+            생일 축하하고 이따 교회에서 보자!<br>
+
+            오늘 하루 행복하게 지내 :)
+
+        </div>
+
+
+        <button
+            onclick="next(8)">
+
+            다음
+
+        </button>
+
+    </div>
+
+
+
+    <!-- =====================
+         마지막
+    ====================== -->
+
+    <div
+        id="screen8"
+        class="screen hidden">
+
+
+        <div class="emoji">
+            💙
+        </div>
+
+
+        <h1>
+
+            이제 이 창을 닫아도 돼.
+
+        </h1>
+
+
+        <p>
+
+            여기까지 플레이해줘서 고마워.<br>
+
+            그리고 다시 한번,
+
+        </p>
+
+
+        <div class="final-text">
+
+            생일 축하해 🎂
+
+        </div>
+
+
+        <p class="small">
+
+            — END —
+
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     서운하다 팝업
+========================= -->
+
+<div
+    class="popup-background"
+    id="sadPopup">
+
+
+    <div class="popup">
+
+
+        <div class="sad">
+            🥺
+        </div>
+
+
+        <h2>
+            서운하다...
+        </h2>
+
+
+        <p>
+            그 사람 이름을 누르면 어떡해...
+        </p>
+
+
+        <button
+            onclick="closePopup()">
+
+            미안해...
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+/* =========================
+   페이지 이동
+========================= */
+
+let current = 1;
+
+
+function next(number) {
+
+
+    document
+        .getElementById(
+            "screen" + current
+        )
+        .classList.add("hidden");
+
+
+    document
+        .getElementById(
+            "screen" + number
+        )
+        .classList.remove("hidden");
+
+
+    current = number;
+
+
+    let progress =
+        ((number - 1) / 7) * 100;
+
+
+    document
+        .getElementById("progress")
+        .style.width =
+        progress + "%";
+
+
+    /* Stage 2 */
+
+    if (number === 3) {
+
+        startMiniGame();
+
+    }
+
+}
+
+
+
+/* =========================
+   미니게임
+========================= */
+
+let remainingTarget = 0;
+
+
+function startMiniGame() {
+
+
+    const area =
+        document.getElementById(
+            "gameArea"
+        );
+
+
+    area.innerHTML = "";
+
+
+    /*
+        10 × 10 = 100칸
+
+        김 / 시 / 윤
+        고 / 정 / 황 / 동
+
+        7글자를 최대한 비슷하게
+        랜덤 배치
+    */
+
+
+    const letters = [
+
+        "김",
+        "시",
+        "윤",
+        "고",
+        "정",
+        "황",
+        "동"
+
+    ];
+
+
+    let letterList = [];
+
+
+    /*
+        100칸에
+        7글자를 반복해서 넣는다.
+    */
+
+    for (
+        let i = 0;
+        i < 100;
+        i++
+    ) {
+
+        letterList.push(
+            letters[
+                i % 7
+            ]
+        );
+
+    }
+
+
+    /* 랜덤 섞기 */
+
+    for (
+        let i =
+            letterList.length - 1;
+
+        i > 0;
+
+        i--
+    ) {
+
+        const j =
+            Math.floor(
+                Math.random()
+                * (i + 1)
+            );
+
+
+        [
+            letterList[i],
+            letterList[j]
+
+        ] = [
+
+            letterList[j],
+            letterList[i]
+
+        ];
+
+    }
+
+
+    /*
+        김 / 시 / 윤 개수
+    */
+
+    remainingTarget =
+        letterList.filter(
+            letter =>
+
+                letter === "김" ||
+
+                letter === "시" ||
+
+                letter === "윤"
+
+        ).length;
+
+
+    document
+        .getElementById(
+            "counter"
+        )
+        .innerText =
+        remainingTarget;
+
+
+    const clearButton =
+        document.getElementById(
+            "clearButton"
+        );
+
+
+    clearButton.disabled =
+        true;
+
+
+    clearButton.innerText =
+        "아직이야!";
+
+
+
+    /* 100칸 만들기 */
+
+    letterList.forEach(
+        letter => {
+
+
+            const target =
+                document.createElement(
+                    "button"
+                );
+
+
+            target.className =
+                "target";
+
+
+            target.innerText =
+                letter;
+
+
+
+            target.onclick =
+                function() {
+
+
+                /*
+                    김 / 시 / 윤
+                */
+
+                if (
+
+                    letter === "김" ||
+
+                    letter === "시" ||
+
+                    letter === "윤"
+
+                ) {
+
+
+                    target.innerText =
+                        "";
+
+
+                    target.disabled =
+                        true;
+
+
+                    remainingTarget--;
+
+
+                    document
+                        .getElementById(
+                            "counter"
+                        )
+                        .innerText =
+                        remainingTarget;
+
+
+
+                    /*
+                        전부 찾음
+                    */
+
+                    if (
+                        remainingTarget
+                        === 0
+                    ) {
+
+
+                        clearButton
+                            .disabled =
+                            false;
+
+
+                        clearButton
+                            .innerText =
+                            "✨ 다 찾았다! 다음으로";
+
+                    }
+
+
+                }
+
+                else {
+
+
+                    /*
+                        고 / 정 / 황 / 동
+                        클릭하면 팝업
+                    */
+
+                    showSadPopup();
+
+                }
+
+            };
+
+
+            area.appendChild(
+                target
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =========================
+   서운하다 팝업
+========================= */
+
+function showSadPopup() {
+
+    document
+        .getElementById(
+            "sadPopup"
+        )
+        .style.display =
+        "flex";
+
+}
+
+
+function closePopup() {
+
+    document
+        .getElementById(
+            "sadPopup"
+        )
+        .style.display =
+        "none";
+
+}
+
+
+
+/* =========================
+   생일 축하
+========================= */
+
+function birthday() {
+
+
+    next(6);
+
+
+    const emojis = [
+
+        "🎉",
+        "✨",
+        "💙",
+        "🩷",
+        "🎂",
+        "🎈"
+
+    ];
+
+
+    for (
+        let i = 0;
+        i < 35;
+        i++
+    ) {
+
+
+        const confetti =
+            document.createElement(
+                "div"
+            );
+
+
+        confetti.className =
+            "confetti";
+
+
+        confetti.innerText =
+            emojis[
+                Math.floor(
+                    Math.random()
+                    * emojis.length
+                )
+            ];
+
+
+        confetti.style.left =
+            Math.random()
+            * 100
+            + "vw";
+
+
+        confetti.style.animationDuration =
+            (
+                2 +
+                Math.random() * 2
+            )
+            + "s";
+
+
+        document.body.appendChild(
+            confetti
+        );
+
+
+        setTimeout(
+            () => {
+
+                confetti.remove();
+
+            },
+
+            4000
+        );
+
+    }
+
+}
+
+
+
+/* =========================
+   생일 축하 → 편지
+========================= */
+
+function closeMessage() {
+
+    next(7);
+
+}
+
+</script>
+
+</body>
+</html>
